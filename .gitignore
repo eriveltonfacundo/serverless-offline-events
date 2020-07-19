@@ -1,0 +1,12 @@
+node_modules
+jspm_packages
+package-lock.json
+npm-debug.log
+newrelic_agent.log
+.serverless
+.dynamodb
+.idea
+dist
+coverage
+.nyc_output
+.env
