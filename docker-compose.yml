@@ -1,0 +1,30 @@
+version: '3.5'
+services:
+    redis:
+        image: redis
+        ports:
+            - '6379:6379'
+    dynamodb:
+        image: cnadiminti/dynamodb-local
+        ports:
+            - '8000:8000'
+    sqs:
+        image: softwaremill/elasticmq
+        ports:
+            - '9324:9324'
+    secretsmanager:
+        image: skarpdev/aws-secrets-manager-emulator:0.1.0
+        volumes:
+            - '../tool/secrets:/secrets'
+        ports:
+            - '4584:3000'
+    sls:
+        build: .
+        command: npm run watch
+        ports:
+            - '3000:3000'
+            - '3002:3002'
+            - '9229:9229'
+        volumes:
+            - .:/usr/app
+            - usr/app/node_modules

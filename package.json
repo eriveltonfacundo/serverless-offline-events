@@ -1,0 +1,17 @@
+{
+    "name": "serverless-offline-events",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start": "node --inspect=0.0.0.0:9229 --nolazy ./node_modules/.bin/serverless offline start --host 0.0.0.0 --noPrependStageInUrl",
+        "watch": "node ./node_modules/nodemon/bin/nodemon --ext js,yml,json --exec npm start"
+    },
+    "dependencies": {
+        "nodemon": "^2.0.4",
+        "serverless": "^1.75.1",
+        "serverless-offline": "6.5.0",
+        "serverless-offline-sns": "0.68.0",
+        "serverless-offline-sqs": "4.0.1",
+        "serverless-dotenv-plugin": "2.4.2"
+    }
+}
