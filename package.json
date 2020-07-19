@@ -1,20 +1,30 @@
 {
     "name": "serverless-offline-events",
     "version": "1.0.0",
-    "description": "",
     "scripts": {
         "start": "node --inspect=0.0.0.0:9229 --nolazy ./node_modules/.bin/serverless offline start --host 0.0.0.0 --noPrependStageInUrl",
-        "watch": "node ./node_modules/nodemon/bin/nodemon --ext js,yml,json --exec npm start"
+        "watch:dev": "node ./node_modules/nodemon/bin/nodemon --exec npm start",
+        "debug": "export SLS_DEBUG=* && npm start",
+        "watch:debug": "node ./node_modules/nodemon/bin/nodemon --exec npm run debug"
+    },
+    "nodemonConfig": {
+        "ext": "js,yml",
+        "ignore": [
+            "tools/*",
+            ".vscode/*",
+            "**/node_modules/**"
+        ]
     },
     "dependencies": {
-        "nodemon": "2.0.4",
-        "serverless": "1.75.1",
-        "serverless-offline": "6.5.0",
-        "serverless-offline-s3": "4.0.3",
-        "serverless-offline-sns": "0.68.0",
-        "serverless-offline-sqs": "4.0.1",
-        "serverless-dotenv-plugin": "2.4.2",
-        "serverless-offline-kinesis": "4.0.1",
-        "serverless-offline-dynamodb-streams": "4.0.1"
+        "nodemon": "^2.0.4",
+        "serverless": "^1.75.1",
+        "serverless-offline": "^6.5.0",
+        "serverless-offline-s3": "^4.0.3",
+        "serverless-offline-sns": "^0.68.0",
+        "serverless-offline-sqs": "^4.0.1",
+        "serverless-offline-sqs-dlq": "^1.2.0",
+        "serverless-dotenv-plugin": "^2.4.2",
+        "serverless-offline-kinesis": "^4.0.1",
+        "serverless-offline-dynamodb-streams": "^4.0.1"
     }
 }

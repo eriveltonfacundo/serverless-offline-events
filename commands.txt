@@ -1,0 +1,25 @@
+docker cp sls_sls_1:/usr/app/node_modules/ .
+
+POST http://localhost:3002/2015-03-31/functions/serverless-offline-events-dev-{functionName}/invocations
+POST http://localhost:3002/2015-03-31/functions/serverless-offline-events-dev-test-sqs/invocations
+
+aws --endpoint-url http://localhost:9000 s3 mb s3://files
+aws --endpoint-url http://localhost:9000 s3 cp tools/s3/test.txt s3://files
+
+aws --endpoint-url http://localhost:9324 sqs list-queues 
+aws --endpoint-url http://localhost:9324 sqs send-message --queue-url http://localhost:9324/queue/TestQueue --message-body '{ "test1": 1, "test2": 20 }'
+
+aws --endpoint-url http://localhost:8000 dynamodb list-tables
+aws --endpoint-url http://localhost:8000 dynamodb create-table --cli-input-json file://tools/dynamodb/create-table-test.json 
+aws --endpoint-url http://localhost:8000 dynamodb delete-table --table-name Test
+aws --endpoint-url http://localhost:8000 dynamodb describe-table --table-name Test
+aws --endpoint-url http://localhost:8000 dynamodb put-item --table-name Test --item file://tools/dynamodb/create-item-test.json 
+
+aws --endpoint-url http://localhost:8000 dynamodbstreams list-streams
+
+aws --endpoint-url http://localhost:4002 sns list-topics 
+aws --endpoint-url http://localhost:4002 sns publish --topic-arn 'arn:aws:sns:us-east-1:123456789012:Test' --message '{ "test1": 1, "test2": 20 }'
+
+aws --endpoint-url http://localhost:4567 kinesis list-streams
+aws --endpoint-url http://localhost:4567 kinesis create-stream --stream-name TestStream --shard-count 1
+aws --endpoint-url http://localhost:4567 kinesis put-record --stream-name TestStream --data '{ "test1": 1, "test2": 20 }' --partition-key p1

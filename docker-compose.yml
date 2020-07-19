@@ -15,7 +15,7 @@ services:
     secretsmanager:
         image: skarpdev/aws-secrets-manager-emulator:0.1.0
         volumes:
-            - './tool/secrets:/secrets'
+            - './tools/secrets:/secrets'
         ports:
             - '4584:3000'
     s3:
@@ -23,16 +23,24 @@ services:
         command: server /data
         ports:
             - '9000:9000'
+        environment:
+            - AWS_DEFAULT_REGION=${AWS_REGION}
+            - AWS_ACCESS_KEY_ID=${ACCESS_KEY_ID}
+            - AWS_SECRET_ACCESS_KEY=${SECRET_ACCESS_KEY}
+            - MINIO_ACCESS_KEY=${ACCESS_KEY_ID}
+            - MINIO_SECRET_KEY=${SECRET_ACCESS_KEY}
     kinesis:
         image: dlsniper/kinesalite
         ports:
             - '4567:4567'
     sls:
         build: .
-        command: npm run watch
+        command: npm run watch:dev
+        network_mode: host
         ports:
             - '3000:3000'
             - '3002:3002'
+            - '4002:4002'
             - '9229:9229'
         volumes:
             - .:/usr/app

@@ -2,15 +2,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Node: Attach to Remote",
+            "name": "Node: Remote Attach",
             "type": "node",
             "request": "attach",
             "protocol": "inspector",
-            "restart": true,
             "address": "localhost",
             "port": 9229,
+            "localRoot": "${workspaceFolder}",
             "remoteRoot": "/usr/app",
-            "localRoot": "${workspaceFolder}"
+            "restart": true
         }
     ]
 }
