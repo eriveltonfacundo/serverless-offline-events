@@ -7,11 +7,14 @@
         "watch": "node ./node_modules/nodemon/bin/nodemon --ext js,yml,json --exec npm start"
     },
     "dependencies": {
-        "nodemon": "^2.0.4",
-        "serverless": "^1.75.1",
+        "nodemon": "2.0.4",
+        "serverless": "1.75.1",
         "serverless-offline": "6.5.0",
+        "serverless-offline-s3": "4.0.3",
         "serverless-offline-sns": "0.68.0",
         "serverless-offline-sqs": "4.0.1",
-        "serverless-dotenv-plugin": "2.4.2"
+        "serverless-dotenv-plugin": "2.4.2",
+        "serverless-offline-kinesis": "4.0.1",
+        "serverless-offline-dynamodb-streams": "4.0.1"
     }
 }
